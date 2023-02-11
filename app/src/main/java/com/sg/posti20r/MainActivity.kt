@@ -26,12 +26,11 @@ class MainActivity : AppCompatActivity() {
         var posts = ArrayList<Post>()
 
         val ranges = listOf(
-//           Pair(100, 103),
-//    Pair(29900, 29915),Pair(296, 299),
-//          Pair(3999000, 3999022),
-            Pair(3999017, 3999020),
+           Pair(100, 103),
+    Pair(29900, 29916),Pair(296, 299),
+          Pair(3999000, 3999022),
 //           Pair(3970, 3999),                                        //0.k.
-//           Pair(4999050, 4999076),
+//           Pair(4999013, 4999077),
 //           Pair(5999000, 5999006), Pair(596, 599),
 //           Pair(648, 655),
 //           Pair(718, 719)
@@ -55,10 +54,13 @@ class MainActivity : AppCompatActivity() {
         return posts
     }
     private fun createViewPager2(posts: ArrayList<Post>) {
-        logi("Main  58 posts=$posts")
         val viewPager = findViewById<ViewPager2>(R.id.viewpager)
         viewPager.adapter = PostViewPagerAdapter(posts)
-        viewPager.setPageTransformer(PostPageTransformer())
+     //   viewPager.setPageTransformer(PostPageTransformer())
+
+        viewPager.setPageTransformer(FlipCardTransformer())
+
+
     }
     fun logi(message: String) {
         Log.i("gg", message)
