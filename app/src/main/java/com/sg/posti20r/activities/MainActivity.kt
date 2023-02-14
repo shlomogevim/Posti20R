@@ -1,5 +1,7 @@
-package com.sg.posti20r
+package com.sg.posti20r.activities
 
+import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
@@ -7,25 +9,81 @@ import android.util.Log
 import android.view.WindowManager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import com.sg.posti20r.R
 
 import com.sg.posti20r.adapter.PostViewPagerAdapter
+import com.sg.posti20r.databinding.ActivityMainBinding
 import com.sg.posti20r.model.Post
-import com.sg.posti20r.tools.Helper
-import com.sg.posti20r.tools.POST_NUM
-import com.sg.posti20r.tools.POST_REF
+import com.sg.posti20r.tools.*
 import com.wajahatkarim3.easyflipviewpager.CardFlipPageTransformer2
+import java.lang.reflect.Type
 import kotlin.random.Random
 
 class MainActivity : AppCompatActivity() {
+    private lateinit var binding: ActivityMainBinding
     val helper=Helper()
+    lateinit var pref: SharedPreferences
+    //var posts=ArrayList<Post>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
-        supportActionBar?.hide()
+        binding= ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+//        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+//        supportActionBar?.hide()
 
-            downloadAllPost()
+        pref = getSharedPreferences(SHARPREF_ALMA, Context.MODE_PRIVATE)
+        createViewPager10()
+
+      //  downloadAllPost()
     }
+
+    private fun createViewPager10() {
+          val posts1=loadPosts()
+
+
+
+//        val viewPager = findViewById<ViewPager2>(R.id.viewpager)
+        binding.viewpager.adapter = PostViewPagerAdapter(posts1)
+        //   viewPager.setPageTransformer(PostPageTransformer())
+
+        val cardFlipPageTransformer = CardFlipPageTransformer2()
+        cardFlipPageTransformer.setScalable(false)
+        binding.viewpager.setPageTransformer(cardFlipPageTransformer)
+
+        createViewPager(posts1)
+    }
+
+    private fun loadPosts(): ArrayList<Post> {
+        val gson = Gson()
+        val json: String? = pref.getString(SHARPREF_POSTS_ARRAY, null)
+        if (json != null) {
+            val type: Type = object : TypeToken<ArrayList<Post>>() {}.type
+            val posts: ArrayList<Post> = gson.fromJson(json, type)
+            return posts
+        } else {
+            // handle case where SHARPREF_POSTS_ARRAY is not set in pref
+            return ArrayList<Post>()
+        }
+    }
+
+
+/*private fun loadPosts(): ArrayList<Post> {
+    val gson = Gson()
+    val json: String? = pref.getString(SHARPREF_POSTS_ARRAY, null)
+    if (json != null) {
+        val type: Type = object : TypeToken<ArrayList<Post>>() {}.type
+        val posts: ArrayList<Post> = gson.fromJson(json, type)
+        return posts
+    } else {
+        // handle case where SHARPREF_POSTS_ARRAY is not set in pref
+        return ArrayList<Post>()
+    }
+}*/
+
+
+
 
     fun downloadAllPost(): ArrayList<Post> {
         var posts = ArrayList<Post>()
@@ -85,13 +143,12 @@ class MainActivity : AppCompatActivity() {
         callback(ArrayList(posts1))
     }
     private fun createViewPager(posts: ArrayList<Post>) {
-        val viewPager = findViewById<ViewPager2>(R.id.viewpager)
-        viewPager.adapter = PostViewPagerAdapter(posts)
+         binding.viewpager.adapter = PostViewPagerAdapter(posts)
         //   viewPager.setPageTransformer(PostPageTransformer())
 
         val cardFlipPageTransformer = CardFlipPageTransformer2()
         cardFlipPageTransformer.setScalable(false)
-        viewPager.setPageTransformer(cardFlipPageTransformer)
+        binding.viewpager.setPageTransformer(cardFlipPageTransformer)
 
     }
 

@@ -3,7 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_help_actvity.xml" value="0.234375" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_splash.xml" value="0.234375" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/item_post.xml" value="0.234375" />
       </map>
     </option>

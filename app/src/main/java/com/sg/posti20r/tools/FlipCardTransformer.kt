@@ -1,4 +1,4 @@
-package com.sg.posti20r
+package com.sg.posti20r.tools
 
 import android.view.View
 import androidx.viewpager2.widget.ViewPager2

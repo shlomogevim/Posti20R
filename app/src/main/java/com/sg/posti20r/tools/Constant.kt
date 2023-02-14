@@ -1,15 +1,35 @@
 package com.sg.posti20r.tools
 
+const val SHARPREF_ALMA = "ShareprefAlma"
+const val SHARPREF_CURRENT_POST_NUM = "ShareprefCurrentPostNum"
+const val SHARPREF_CURRENT_POST_POSITION = "ShareprefCurrentPostPOSITION"
+const val SHARPREF_TOTAL_POSTS_SIZE = "ShareprefTotalPostSize"
+const val SHARPREF_POSTS_ARRAY="ShearePrefPostsArray"
+const val SHARPREF_SORT_SYSTEM="SharprefSortSystem"
+const val SHARPREF_SORT_BY_GRADE="SharprefSortByGrade"
+const val SHARPREF_SORT_BY_TIME_PUBLISH="SharprefSortByTimePublish"
+const val SHARPREF_SORT_BY_RECOMMENDED="SharprefSortByRecommended"
+const val SHARPREF_SPLASH_SCREEN_DELAY="SharprefSplashScreenDelay"
+const val SHARPREF_GRADE_ZERO="SharprefGradeZero"
+const val SHARPREF_GRADE_ARRAY="SharprefGradeArray"
+const val SHARPREF_MOVING_BACKGROUND="SharprefMovingBackground"
+
+
+const val SHARPREF_COMMENTS_ARRAY="ShearePrefCommentsArray"
+const val SHARPREF_CURRENT_POST = "ShareprefCurrentPost"
+const val SHARPREF_CURRENT_POST_NUM_STRING = "ShareprefCurrentPostNumString"
+
+const val SHARPREF_CURRENT_USER_NAME = "ShareprefCurrentUserName"
+
+
+
+
 const val CONSTANT="constant"
 const val NOT_CONSTANT="notConstant"
 
 const val POST_PICTURE="Posts Picture"
-const val SHARPREF_ALMA = "ShareprefAlma"
-//const val SHARPREF_CHANGE_TIMESTAMP = "ShareprefChangeTimestamp"
 
 
-const val NO_TOP= -1
-const val NO_BOTTOM= -1
 const val TOP="Top"
 const val BOTTOM= "Bottom"
 
@@ -38,10 +58,6 @@ const val POST_IMAGE_STAM="Posts Image Stam"
 
 const val VIDEO_URL="current_url"
 const val VIDEO_TEXT="current_text"
-const val SHARPREF_CURRENT_POST = "ShareprefCurrentPost"
-
-
-const val SHARPREF_MOVING_BACKGROUND="SharprefMovingBackground"
 const val TRUE="true"
 const val FALSE="false"
 
