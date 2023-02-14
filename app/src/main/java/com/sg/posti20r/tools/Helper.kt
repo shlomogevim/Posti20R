@@ -6,6 +6,28 @@ import com.sg.posti20r.model.Post
 
 class Helper {
 
+    fun getRanges(): List<Pair<Int, Int>> {
+        return listOf(
+            Pair(100, 103),
+            //---------------------------
+            Pair(29900, 29916),
+            Pair(296, 299),
+            //---------------------------
+            Pair(3999000, 3999023),
+            Pair(3970, 3999),
+            //---------------------------
+            Pair(4999013, 4999077),
+            Pair(4940, 4999),
+            //---------------------------
+            Pair(5999000, 5999006),
+            Pair(596, 599),
+            //---------------------------
+            Pair(648, 655),
+            //---------------------------
+            Pair(718, 719)
+        )
+    }
+
     fun retrivePostFromFirestore(snap: DocumentSnapshot?): Post {
 
         var textLocation1: String? =null

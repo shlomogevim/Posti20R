@@ -35,7 +35,7 @@ class DrawPostHelper: AppCompatActivity() {
 //        logi("34      currentPost.postNum=${currentPost.postNum}")
 
 //       ***********
-    //    drawHelperPostNum(post,constraintLayout)
+//      drawHelperPostNum(post,constraintLayout)
 //      ***********
     }
 
