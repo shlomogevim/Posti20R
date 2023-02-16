@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.view.View
 import android.view.animation.AlphaAnimation
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.gson.Gson
@@ -143,10 +144,13 @@ class SplashActivity : AppCompatActivity() {
 
             override fun onFinish() {
                 timer?.let {
-                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    binding.lottie.cancelAnimation()
+                    binding.tvText2.visibility= View.GONE
+                      startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    finish()
                 }
             }
-        }
+          }
     }
 
     override fun onStart() {
