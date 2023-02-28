@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.CountDownTimer
 import android.os.Handler
+import android.util.Log
 import android.view.View
 import android.view.animation.AlphaAnimation
 import com.google.firebase.firestore.FirebaseFirestore
@@ -32,6 +33,7 @@ class SplashActivity : AppCompatActivity() {
         helpBtnOperate()
         getHeadLines()
       downloadAllPost()
+//          pauseIt()
     }
 
     fun downloadAllPost(): ArrayList<Post> {
@@ -40,7 +42,6 @@ class SplashActivity : AppCompatActivity() {
         posts.addAll(downloadPostsForRanges(ranges))
         return posts
     }
-
 
     private fun downloadPostsForRanges(ranges: List<Pair<Int, Int>>): ArrayList<Post> {
         val posts = ArrayList<Post>()
@@ -54,6 +55,7 @@ class SplashActivity : AppCompatActivity() {
                             val post = Helper().retrivePostFromFirestore(doc)
                             posts.add(post)
                         }
+//                        logi("57  posts.size=${posts.size}")
                         val posts1=createSuffelPosts(posts)
                         savePosts(posts1)
                          pref.edit().putInt(SHARPREF_TOTAL_POSTS_SIZE,posts.size).apply()
@@ -72,16 +74,11 @@ class SplashActivity : AppCompatActivity() {
         editor.apply()
     }
 
-
     private fun createSuffelPosts(posts:ArrayList<Post>): ArrayList<Post> {
         val posts1 = posts.toMutableList()
         posts1.shuffle(Random(System.currentTimeMillis()))
        return ArrayList(posts1)
     }
-
-
-
-
 
     private fun initData() {
         //gradeArray = arrayListOf()
@@ -91,12 +88,15 @@ class SplashActivity : AppCompatActivity() {
         pref.edit().putString(SHARPREF_SORT_SYSTEM, SHARPREF_SORT_BY_TIME_PUBLISH).apply()
 //        pref.edit().putString(SHARPREF_SORT_SYSTEM, SHARPREF_SORT_BY_RECOMMENDED).apply()
         pref.edit().putString(SHARPREF_MOVING_BACKGROUND, TRUE).apply()
-        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY, 10) * 1000
+//        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY, 10) * 1000
+        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY,3) * 1000
     }
+    
     private fun helpBtnOperate() {
         binding.btnHelp.setOnClickListener {
             pressHelpBtn = true
-            startActivity(Intent(this, HelpActivity::class.java))
+//            startActivity(Intent(this, HelpActivity::class.java))
+            pauseIt()
         }
     }
     private fun getHeadLines() {
@@ -176,7 +176,9 @@ class SplashActivity : AppCompatActivity() {
         )
     }
 
-
+    fun logi(message: String) {
+        Log.i("gg", message)
+    }
 
 
 }

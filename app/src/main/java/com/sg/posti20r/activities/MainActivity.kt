@@ -41,10 +41,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun createViewPager10() {
           val posts1=loadPosts()
-
-
-
-//        val viewPager = findViewById<ViewPager2>(R.id.viewpager)
+//        logi("posts1.size=${posts1.size}")
         binding.viewpager.adapter = PostViewPagerAdapter(posts1)
         //   viewPager.setPageTransformer(PostPageTransformer())
 

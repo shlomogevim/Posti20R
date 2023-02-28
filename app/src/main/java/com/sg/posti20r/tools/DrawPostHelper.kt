@@ -215,7 +215,7 @@ class DrawPostHelper: AppCompatActivity() {
             post.textLocation[4]=dxMovment
             post.textLocation[5]=dyMovment
             matrix.postTranslate(dxMovment.toPxf(),dyMovment.toPxf(),)
-            logi( "DrawPostHelper 160  dxMovment=$dxMovment  post.textLocation=${post.textLocation}")
+//            logi( "DrawPostHelper 160  dxMovment=$dxMovment  post.textLocation=${post.textLocation}")
             imageView.imageMatrix = matrix
         }
 

@@ -3,10 +3,19 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/button_background.xml" value="0.168" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/button_black_background.xml" value="0.168" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/category_check.xml" value="0.1645" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/category_toggle_moving.xml" value="0.168" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/comment_background.xml" value="0.1645" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/drawable-v24/ic_send.xml" value="0.168" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_help_actvity.xml" value="0.234375" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_main.xml" value="0.234375" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_post_detailes.xml" value="0.2" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_splash.xml" value="0.234375" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/activity_stam1.xml" value="0.1" />
         <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/item_post.xml" value="0.234375" />
+        <entry key="..\:/A.Project/Posti/Posti20R/app/src/main/res/layout/stam.xml" value="0.1" />
       </map>
     </option>
   </component>
