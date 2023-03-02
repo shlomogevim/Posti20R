@@ -19,27 +19,28 @@ import kotlin.random.Random
 
 class SplashActivity : AppCompatActivity() {
     lateinit var binding: ActivitySplashBinding
-    lateinit var pref:SharedPreferences
-    val helper=Helper()
-    var delayInMicroSecond =0
+    lateinit var pref: SharedPreferences
+    val helper = Helper()
+    var delayInMicroSecond = 0
     var pressHelpBtn = false
     lateinit var timer: CountDownTimer
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivitySplashBinding.inflate(layoutInflater)
+        binding = ActivitySplashBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         initData()
         helpBtnOperate()
         getHeadLines()
-      downloadAllPost()
+        downloadAllPost()
 //          pauseIt()
     }
 
     fun downloadAllPost(): ArrayList<Post> {
         var posts = ArrayList<Post>()
         val ranges = helper.getRanges()
-        posts.addAll(downloadPostsForRanges(ranges))
+//        posts.addAll(downloadPostsForRanges(ranges))
+        posts.addAll(downloadPosts())
         return posts
     }
 
@@ -56,28 +57,46 @@ class SplashActivity : AppCompatActivity() {
                             posts.add(post)
                         }
 //                        logi("57  posts.size=${posts.size}")
-                        val posts1=createSuffelPosts(posts)
+                        val posts1 = createSuffelPosts(posts)
                         savePosts(posts1)
-                         pref.edit().putInt(SHARPREF_TOTAL_POSTS_SIZE,posts.size).apply()
+                        pref.edit().putInt(SHARPREF_TOTAL_POSTS_SIZE, posts.size).apply()
                     }
                 }
         }
         return posts
     }
 
+    private fun downloadPosts(): ArrayList<Post> {
+        val posts = ArrayList<Post>()
+        FirebaseFirestore.getInstance().collection(POST_REF)
+            .addSnapshotListener { value, error ->
+                if (value != null) {
+                    for (doc in value.documents) {
+                        val post = Helper().retrivePostFromFirestore(doc)
+                        posts.add(post)
+                    }
+//                        logi("57  posts.size=${posts.size}")
+                    val posts1 = createSuffelPosts(posts)
+                    savePosts(posts1)
+                    pref.edit().putInt(SHARPREF_TOTAL_POSTS_SIZE, posts.size).apply()
+                }
+            }
+        return posts
+    }
+
     private fun savePosts(posts1: ArrayList<Post>) {
-       pref.edit().remove(SHARPREF_POSTS_ARRAY).apply()
-        val editor=pref.edit()
-        val gson= Gson()
+        pref.edit().remove(SHARPREF_POSTS_ARRAY).apply()
+        val editor = pref.edit()
+        val gson = Gson()
         val json: String = gson.toJson(posts1)
         editor.putString(SHARPREF_POSTS_ARRAY, json)
         editor.apply()
     }
 
-    private fun createSuffelPosts(posts:ArrayList<Post>): ArrayList<Post> {
+    private fun createSuffelPosts(posts: ArrayList<Post>): ArrayList<Post> {
         val posts1 = posts.toMutableList()
         posts1.shuffle(Random(System.currentTimeMillis()))
-       return ArrayList(posts1)
+        return ArrayList(posts1)
     }
 
     private fun initData() {
@@ -89,9 +108,9 @@ class SplashActivity : AppCompatActivity() {
 //        pref.edit().putString(SHARPREF_SORT_SYSTEM, SHARPREF_SORT_BY_RECOMMENDED).apply()
         pref.edit().putString(SHARPREF_MOVING_BACKGROUND, TRUE).apply()
 //        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY, 10) * 1000
-        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY,3) * 1000
+        delayInMicroSecond = pref.getInt(SHARPREF_SPLASH_SCREEN_DELAY, 3) * 1000
     }
-    
+
     private fun helpBtnOperate() {
         binding.btnHelp.setOnClickListener {
             pressHelpBtn = true
@@ -99,6 +118,7 @@ class SplashActivity : AppCompatActivity() {
             pauseIt()
         }
     }
+
     private fun getHeadLines() {
         setFirstHello()
         timerWorks()
@@ -145,12 +165,12 @@ class SplashActivity : AppCompatActivity() {
             override fun onFinish() {
                 timer?.let {
                     binding.lottie.cancelAnimation()
-                    binding.tvText2.visibility= View.GONE
-                      startActivity(Intent(this@SplashActivity, MainActivity::class.java))
+                    binding.tvText2.visibility = View.GONE
+                    startActivity(Intent(this@SplashActivity, MainActivity::class.java))
                     finish()
                 }
             }
-          }
+        }
     }
 
     override fun onStart() {
