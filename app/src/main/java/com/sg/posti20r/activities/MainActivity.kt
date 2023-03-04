@@ -45,12 +45,16 @@ class MainActivity : AppCompatActivity() {
         binding.viewpager.adapter = PostViewPagerAdapter(posts1)
         //   viewPager.setPageTransformer(PostPageTransformer())
 
+        binding.viewpager.setOffscreenPageLimit(2)
+
         val cardFlipPageTransformer = CardFlipPageTransformer2()
         cardFlipPageTransformer.setScalable(false)
         binding.viewpager.setPageTransformer(cardFlipPageTransformer)
 
+
         createViewPager(posts1)
     }
+
 
     private fun loadPosts(): ArrayList<Post> {
         val gson = Gson()

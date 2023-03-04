@@ -1,18 +1,16 @@
 package com.sg.posti20r.activities
 
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.sg.posti20r.R
 import com.sg.posti20r.databinding.ActivityPostDetailesBinding
 import com.sg.posti20r.model.Post
-import com.sg.posti20r.tools.SHARPREF_ALMA
-import com.sg.posti20r.tools.SHARPREF_CURRENT_POST
-import com.sg.posti20r.tools.SHARPREF_CURRENT_POST_NUM
+import com.sg.posti20r.tools.*
 import java.lang.reflect.Type
 
 class PostDetailesActivity : AppCompatActivity() {
@@ -38,7 +36,32 @@ class PostDetailesActivity : AppCompatActivity() {
         pref = getSharedPreferences(SHARPREF_ALMA, Context.MODE_PRIVATE)
         currentPost = loadCurrentPost()
         pref.edit().putInt(SHARPREF_CURRENT_POST_NUM, currentPost.postNum).apply()
+        val moving = pref.getString(SHARPREF_MOVING_BACKGROUND, TRUE)
+        binding.movingModeBtn.isChecked = moving == TRUE
+
         drawHeadline()
+        btnSetting()
+
+    }
+
+    private fun btnSetting() {
+        binding.movingModeBtn.setOnClickListener {
+//           logi("PostDetailActivity 182    befor  btn.isChecked=${btn.isChecked}     ")
+            if (binding.movingModeBtn.isChecked == true) {
+                pref.edit().putString(SHARPREF_MOVING_BACKGROUND, TRUE).apply()
+//                binding.movingModeBtn.isChecked =false
+//                logi("PostDetailActivity 185    after  btn.isChecked=${binding.movingModeBtn.isChecked}     ")
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+
+            } else {
+                pref.edit().putString(SHARPREF_MOVING_BACKGROUND, FALSE).apply()
+//                binding.movingModeBtn.isChecked =true
+//                logi("PostDetailActivity 189    after  btn.isChecked=${binding.movingModeBtn.isChecked}     ")
+                startActivity(Intent(this, MainActivity::class.java))
+                finish()
+            }
+        }
 
     }
 

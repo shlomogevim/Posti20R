@@ -48,7 +48,7 @@ class PostViewPagerAdapter(private val posts: ArrayList<Post>) : RecyclerView.Ad
         }
 
         fun bindItems(post: Post) {
-            DrawPostHelper().drawPost(layout, post)
+            DrawPostHelper(layout.context).drawPost(layout, post)
         }
     }
 }
