@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var pref: SharedPreferences
   var posts=ArrayList<Post>()
    lateinit var viewPager:ViewPager2
-    //var posts=ArrayList<Post>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
@@ -38,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 //        supportActionBar?.hide()
 
         pref = getSharedPreferences(SHARPREF_ALMA, Context.MODE_PRIVATE)
-//        createViewPager10()
 
     }
     override fun onResume() {
@@ -46,66 +44,29 @@ class MainActivity : AppCompatActivity() {
 //       logi("MainActivity 63   onResume        sortSystem$sortSystem")
        posts.clear()
         posts=loadPosts()
-
-      var  currentPostNum = pref.getInt(SHARPREF_CURRENT_POST_NUM, 0)
-
         createViewPager10()
-
-
-    /*    if (currentPostNum != 0) {
-                  moveIt(currentPostNum)
-        }else{
-                  createViewPager10()
-        }*/
     }
-
 
     private fun createViewPager10() {
 
 //        logi("posts1.size=${posts1.size}")
         viewPager.adapter = PostViewPagerAdapter(posts)
-        //   viewPager.setPageTransformer(PostPageTransformer())
-
         viewPager.setOffscreenPageLimit(2)
         val cardFlipPageTransformer = CardFlipPageTransformer2()
         cardFlipPageTransformer.setScalable(false)
         viewPager.setPageTransformer(cardFlipPageTransformer)
 
-        var  currentPostNum = pref.getInt(SHARPREF_CURRENT_POST_NUM, 0)
+        val  currentPostNum = pref.getInt(SHARPREF_CURRENT_POST_NUM, 0)
         if (currentPostNum!=0){
-          //  moveIt(currentPostNum)
             val postIndex =posts.indexOfFirst { it.postNum== currentPostNum }
             viewPager.setCurrentItem(postIndex, true)
         }
 
-
         /*  val cardFlipPageTransformer = CardFlipPageTransformer2()
         cardFlipPageTransformer.setScalable(false)
         binding.viewpager.setPageTransformer(cardFlipPageTransformer)*/
-
-
     }
-    private fun moveIt(currentPostNum:Int) {
 
-        val postIndex =posts.indexOfFirst { it.postNum== currentPostNum }
-        viewPager.setCurrentItem(postIndex, true)
-
-
-
-
-        //logi("MainActivity 129   currentPostNum=$currentPostNum")
-/*
-        Handler().postDelayed(
-            {
-                for (counter in 0 until posts.size) {
-                    if (posts[counter].postNum == currentPostNum) {
-                       viewPager.scrollToPosition(counter)
-                        // logi("MainActivity 136   counter=$counter")
-                    }
-                }
-            }, 100
-        )*/
-    }
 
     private fun loadPosts(): ArrayList<Post> {
         val gson = Gson()
@@ -119,22 +80,6 @@ class MainActivity : AppCompatActivity() {
             return ArrayList<Post>()
         }
     }
-
-
-/*private fun loadPosts(): ArrayList<Post> {
-    val gson = Gson()
-    val json: String? = pref.getString(SHARPREF_POSTS_ARRAY, null)
-    if (json != null) {
-        val type: Type = object : TypeToken<ArrayList<Post>>() {}.type
-        val posts: ArrayList<Post> = gson.fromJson(json, type)
-        return posts
-    } else {
-        // handle case where SHARPREF_POSTS_ARRAY is not set in pref
-        return ArrayList<Post>()
-    }
-}*/
-
-
 
 
     fun downloadAllPost(): ArrayList<Post> {
