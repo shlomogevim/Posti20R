@@ -25,36 +25,87 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     val helper=Helper()
     lateinit var pref: SharedPreferences
+  var posts=ArrayList<Post>()
+   lateinit var viewPager:ViewPager2
     //var posts=ArrayList<Post>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding= ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        posts=ArrayList<Post>()
+        viewPager=binding.viewpager
 //        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 //        supportActionBar?.hide()
 
         pref = getSharedPreferences(SHARPREF_ALMA, Context.MODE_PRIVATE)
+//        createViewPager10()
+
+    }
+    override fun onResume() {
+        super.onResume()
+//       logi("MainActivity 63   onResume        sortSystem$sortSystem")
+       posts.clear()
+        posts=loadPosts()
+
+      var  currentPostNum = pref.getInt(SHARPREF_CURRENT_POST_NUM, 0)
+
         createViewPager10()
 
-      //  downloadAllPost()
+
+    /*    if (currentPostNum != 0) {
+                  moveIt(currentPostNum)
+        }else{
+                  createViewPager10()
+        }*/
     }
+
 
     private fun createViewPager10() {
-          val posts1=loadPosts()
+
 //        logi("posts1.size=${posts1.size}")
-        binding.viewpager.adapter = PostViewPagerAdapter(posts1)
+        viewPager.adapter = PostViewPagerAdapter(posts)
         //   viewPager.setPageTransformer(PostPageTransformer())
 
-        binding.viewpager.setOffscreenPageLimit(2)
-
+        viewPager.setOffscreenPageLimit(2)
         val cardFlipPageTransformer = CardFlipPageTransformer2()
         cardFlipPageTransformer.setScalable(false)
-        binding.viewpager.setPageTransformer(cardFlipPageTransformer)
+        viewPager.setPageTransformer(cardFlipPageTransformer)
+
+        var  currentPostNum = pref.getInt(SHARPREF_CURRENT_POST_NUM, 0)
+        if (currentPostNum!=0){
+          //  moveIt(currentPostNum)
+            val postIndex =posts.indexOfFirst { it.postNum== currentPostNum }
+            viewPager.setCurrentItem(postIndex, true)
+        }
 
 
-        createViewPager(posts1)
+        /*  val cardFlipPageTransformer = CardFlipPageTransformer2()
+        cardFlipPageTransformer.setScalable(false)
+        binding.viewpager.setPageTransformer(cardFlipPageTransformer)*/
+
+
     }
+    private fun moveIt(currentPostNum:Int) {
 
+        val postIndex =posts.indexOfFirst { it.postNum== currentPostNum }
+        viewPager.setCurrentItem(postIndex, true)
+
+
+
+
+        //logi("MainActivity 129   currentPostNum=$currentPostNum")
+/*
+        Handler().postDelayed(
+            {
+                for (counter in 0 until posts.size) {
+                    if (posts[counter].postNum == currentPostNum) {
+                       viewPager.scrollToPosition(counter)
+                        // logi("MainActivity 136   counter=$counter")
+                    }
+                }
+            }, 100
+        )*/
+    }
 
     private fun loadPosts(): ArrayList<Post> {
         val gson = Gson()
