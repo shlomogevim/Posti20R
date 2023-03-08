@@ -3,11 +3,18 @@ package com.sg.posti20r.activities
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
+import android.view.ViewGroup
+import android.widget.FrameLayout
+import android.widget.LinearLayout
+import android.widget.ScrollView
+import android.widget.TextView
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.sg.posti20r.R
 import com.sg.posti20r.databinding.ActivityPostDetailesBinding
 import com.sg.posti20r.model.Post
 import com.sg.posti20r.tools.*
@@ -30,7 +37,7 @@ class PostDetailesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding= ActivityPostDetailesBinding.inflate(layoutInflater)
+        binding = ActivityPostDetailesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         pref = getSharedPreferences(SHARPREF_ALMA, Context.MODE_PRIVATE)
@@ -72,6 +79,7 @@ class PostDetailesActivity : AppCompatActivity() {
         val post: Post = gson.fromJson(json, type)
         return post
     }
+
     private fun drawHeadline() {
 //        val st = "  פוסט מספר: " + currentPost.postNum.toString()
         val st = " מספר: " + currentPost.postNum.toString()
@@ -79,114 +87,129 @@ class PostDetailesActivity : AppCompatActivity() {
         // logi("PostDetailsActivity  233  post=$currentPost    \n post.postText.size= ${currentPost.postText.size}")
         drawPostText()
     }
+
     private fun drawPostText() {
-        if (currentPost.postText.size == 1) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-        }
-        if (currentPost.postText.size == 2) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-        }
-        if (currentPost.postText.size == 3) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-        }
-        if (currentPost.postText.size == 4) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-        }
-        if (currentPost.postText.size == 5) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost5.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-            binding.tvPost5.text = currentPost.postText[4]
-        }
-        if (currentPost.postText.size == 6) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost5.visibility = View.VISIBLE
-            binding.tvPost6.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-            binding.tvPost5.text = currentPost.postText[4]
-            binding.tvPost6.text = currentPost.postText[5]
-        }
-        if (currentPost.postText.size == 7) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost5.visibility = View.VISIBLE
-            binding.tvPost6.visibility = View.VISIBLE
-            binding.tvPost7.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-            binding.tvPost5.text = currentPost.postText[4]
-            binding.tvPost6.text = currentPost.postText[5]
-            binding.tvPost7.text = currentPost.postText[6]
-        }
-        if (currentPost.postText.size == 8) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost5.visibility = View.VISIBLE
-            binding.tvPost6.visibility = View.VISIBLE
-            binding.tvPost7.visibility = View.VISIBLE
-            binding.tvPost8.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-            binding.tvPost5.text = currentPost.postText[4]
-            binding.tvPost6.text = currentPost.postText[5]
-            binding.tvPost7.text = currentPost.postText[6]
-            binding.tvPost8.text = currentPost.postText[7]
-        }
-        if (currentPost.postText.size == 9) {
-            binding.tvPost1.visibility = View.VISIBLE
-            binding.tvPost2.visibility = View.VISIBLE
-            binding.tvPost3.visibility = View.VISIBLE
-            binding.tvPost4.visibility = View.VISIBLE
-            binding.tvPost5.visibility = View.VISIBLE
-            binding.tvPost6.visibility = View.VISIBLE
-            binding.tvPost7.visibility = View.VISIBLE
-            binding.tvPost8.visibility = View.VISIBLE
-            binding.tvPost9.visibility = View.VISIBLE
-            binding.tvPost1.text = currentPost.postText[0]
-            binding.tvPost2.text = currentPost.postText[1]
-            binding.tvPost3.text = currentPost.postText[2]
-            binding.tvPost4.text = currentPost.postText[3]
-            binding.tvPost5.text = currentPost.postText[4]
-            binding.tvPost6.text = currentPost.postText[5]
-            binding.tvPost7.text = currentPost.postText[6]
-            binding.tvPost8.text = currentPost.postText[7]
-            binding.tvPost9.text = currentPost.postText[8]
-        }
+        val combineText = currentPost.postText.joinToString(separator = "\n")
+        binding.textPost.text = combineText
+        binding.textPost.setHorizontallyScrolling(false)
+
     }
+
+
+
+
+
+
+        /*   val numlinesToShow = Math.min(currentPost.postText.size, 5)
+//        val myLinearLayout = LinearLayout(this)
+        val myLinearLayout = binding.textPostLayout
+
+        val parentLayout=myLinearLayout.parent as ViewGroup
+        parentLayout.removeView(myLinearLayout)
+        val scrollView = ScrollView(this)
+        scrollView.addView(myLinearLayout)
+
+        myLinearLayout.orientation = LinearLayout.VERTICAL
+
+        for (i in 0 until numlinesToShow) {
+            val textView = TextView(this)
+            textView.textSize = 12f
+            textView.setTextColor(Color.WHITE)
+            textView.setBackgroundColor(Color.GREEN)
+            textView.text = currentPost.postText[i]
+            myLinearLayout.addView(textView)
+        }
+
+        setContentView(scrollView)*/
+
+
+/*
+        val textPostLayout=binding.textPostLayout
+        val scrollView=binding.scrollView
+        for (i in 0..currentPost.postText.size){
+            val textView=TextView(this)
+            textView.text=currentPost.postText[i]
+            textPostLayout.addView(textView)
+            textPostLayout.layoutParams.height=LinearLayout.LayoutParams.WRAP_CONTENT
+          scrollView.layoutParams.height=0*/
+
+        /*val scrollView = binding.scrollView
+        scrollView.isScrollContainer = false // disable scrolling
+
+        val textPostLayout = binding.textPostLayout
+        textPostLayout.orientation = LinearLayout.VERTICAL
+
+        val postText = currentPost.postText
+
+        for (i in 0 until postText.size) {
+            if (i == 5) break // maximum of 5 lines
+            val textView = TextView(this)
+            textView.text = postText[i]
+            textPostLayout.addView(textView)
+        }
+
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        textPostLayout.layoutParams = layoutParams*/
+
+        /* val scrollView = binding.scrollView
+
+        scrollView.isVerticalScrollBarEnabled = true // enable vertical scrollbar
+        scrollView.isHorizontalScrollBarEnabled = false // disable horizontal scrollbar
+
+        val textPostLayout = binding.textPostLayout
+        textPostLayout.orientation = LinearLayout.VERTICAL
+
+        val postText = currentPost.postText
+
+        for (i in 0 until postText.size) {
+            if (i == 5) break // maximum of 5 lines
+            val textView = TextView(this)
+            textView.text = postText[i]
+            textPostLayout.addView(textView)
+        }
+
+        val layoutParams = FrameLayout.LayoutParams(
+            FrameLayout.LayoutParams.MATCH_PARENT,
+            FrameLayout.LayoutParams.WRAP_CONTENT
+        )
+        textPostLayout.layoutParams = layoutParams
+
+        scrollView.post {
+            // set scrollview height dynamically based on content
+            val height = textPostLayout.measuredHeight
+            val params = scrollView.layoutParams
+            params.height = height.coerceAtMost(scrollView.height)
+            scrollView.layoutParams = params
+        }
+    }*/
+      /*  val scrollView = binding.scrollView
+        scrollView.isFillViewport = true
+        scrollView.isVerticalScrollBarEnabled = true // enable vertical scrollbar
+        scrollView.isHorizontalScrollBarEnabled = false // disable horizontal scrollbar
+
+        val textPostLayout = binding.textPostLayout
+        textPostLayout.orientation = LinearLayout.VERTICAL
+
+        val postText = currentPost.postText
+
+        for (i in 0 until postText.size) {
+            if (i == 5) break // maximum of 5 lines
+            val textView = TextView(this)
+            textView.text = postText[i]
+            textPostLayout.addView(textView)
+        }
+
+        val layoutParams = textPostLayout.layoutParams as LinearLayout.LayoutParams
+        layoutParams.height =
+            resources.getDimension(R.dimen.max_text_post_height).toInt() // set maximum height
+        textPostLayout.layoutParams = layoutParams*/
+
+
+
 }
+
+
+
